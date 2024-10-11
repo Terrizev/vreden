@@ -3246,14 +3246,20 @@ const avatar = req.query.avatar;
     if (!avatar) {
       return res.status(400).json({ error: 'Parameter "avatar" tidak ditemukan' });
     }
+const {
+    border = "#00BFFF",
+    avatarborder = "#00BFFF",
+    opacity = "0.3"
+    } = req.query
+    
   const welcome = await new canvafy.WelcomeLeave()
   .setAvatar(avatar)
   .setBackground("image", background)
   .setTitle(title)
   .setDescription(desk)
-  .setBorder("#00BFFF")
-  .setAvatarBorder("#00BFFF")
-  .setOverlayOpacity(0.3)
+  .setBorder(border)
+  .setAvatarBorder(avatarboder)
+  .setOverlayOpacity(opacity)
   .build();
 
   res.set('Content-Type', 'image/png');
@@ -3292,14 +3298,20 @@ app.get('/api/saldo', async (req, res) => {
 	const avatar = req.query.avatar;
     if (!avatar) {
       return res.status(400).json({ error: 'Parameter "avatar" tidak ditemukan' });
-    }  
+    }
+    const {
+    border = "#00BFFF",
+    barcolor = "#00BFFF",
+    statuscolor = "#00BFFF"
+    } = req.query
+    
 const ranked = await new canvafy.Rank()
 .setAvatar(avatar)
 .setBackground("image", background)
 .setUsername(name)
-.setBorder("#00BFFF")
-.setBarColor("#00BFFF")
-.setCustomStatus("#00BFFF")
+.setBorder(border)
+.setBarColor(barcolor)
+.setCustomStatus(statuscolor)
 .setLevel(Number(parseInt(level)))
 .setRank(Number(parseInt(rankid)), rank)
 .setCurrentXp(Number(parseInt(exp)))
@@ -3330,14 +3342,20 @@ app.get('/api/levelup', async (req, res) => {
 	const avatar = req.query.avatar;
     if (!avatar) {
       return res.status(400).json({ error: 'Parameter "avatar" tidak ditemukan' });
-    }  
+    }
+    const {
+    border = "#000000",
+    avatarborder = "#00BFFF",
+    opacity = "0.7"
+    } = req.query
+    
 const levelUp = await new canvafy.LevelUp()
 .setAvatar(avatar)
 .setBackground("image", background)
 .setUsername(name)
-.setBorder("#000000")
-.setAvatarBorder("#00BFFF")
-.setOverlayOpacity(0.7)
+.setBorder(border)
+.setAvatarBorder(avatarborder)
+.setOverlayOpacity(opacity)
 .setLevels(Number(parseInt(level)), Number(parseInt(levelup)))
 .build();
 res.set('Content-Type', 'image/png');
@@ -3360,10 +3378,10 @@ app.get('/api/leaderboard', async (req, res) => {
     }
 const top = await new canvafy.Top()
 .setOpacity(0.6)
-.setScoreMessage("Rank Point:") //(Preferred Option)
-.setabbreviateNumber(false) //(Preferred Option)
-.setBackground("image", background) //(Preferred Option)
-.setColors({ box: '#212121', username: '#ffffff', score: '#ffffff', firstRank: '#f7c716', secondRank: '#9e9e9e', thirdRank: '#94610f' }) //(Preferred Option)
+.setScoreMessage("Rank Point:")
+.setabbreviateNumber(false)
+.setBackground("image", background)
+.setColors({ box: '#212121', username: '#ffffff', score: '#ffffff', firstRank: '#f7c716', secondRank: '#9e9e9e', thirdRank: '#94610f' })
 .setUsersData(JSON.parse(data))
 .build();
 res.set('Content-Type', 'image/png');
@@ -3371,7 +3389,6 @@ res.set('Content-Type', 'image/png');
 });
 
 app.get('/api/send-kode-email', async (req, res) => {
-// Fungsi untuk validasi URL
 function isValidUrl(urlString) {
   try {
     new URL(urlString);
@@ -3381,7 +3398,6 @@ function isValidUrl(urlString) {
   }
 }
 
-// Fungsi untuk validasi email
 function isValidEmail(email) {
   const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   return re.test(String(email).toLowerCase());

@@ -3069,7 +3069,7 @@ app.get('/api/meme', async (req, res) => {
   }
 });
 app.get('/api/tebakhero', async (req, res) => {
-let abu = await fetch('https://raw.githubusercontent.com/vreden/vreden/main/tebakhero.json')
+let abu = await fetch('https://www.vreden.my.id/cdn/game/tebakhero.json')
 var anu = await abu.json()
 let result = anu[Math.floor(Math.random() * anu.length)]
 let results = {
@@ -3084,7 +3084,7 @@ res.status(200).json({
     });
 });
 app.get('/api/tebakff', async (req, res) => {
-let abu = await fetch('https://raw.githubusercontent.com/vreden/vreden/main/tebakff.json')
+let abu = await fetch('https://www.vreden.my.id/cdn/game/tebakff.json')
 var anu = await abu.json()
 let result = anu[Math.floor(Math.random() * anu.length)]
 let results = {

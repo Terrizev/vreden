@@ -3259,7 +3259,7 @@ const {
   .setDescription(desk)
   .setBorder(border)
   .setAvatarBorder(avatarborder)
-  .setOverlayOpacity(opacity)
+  .setOverlayOpacity(Number(opacity))
   .build();
 
   res.set('Content-Type', 'image/png');
@@ -3355,7 +3355,7 @@ const levelUp = await new canvafy.LevelUp()
 .setUsername(name)
 .setBorder(border)
 .setAvatarBorder(avatarborder)
-.setOverlayOpacity(opacity)
+.setOverlayOpacity(Number(opacity))
 .setLevels(Number(parseInt(level)), Number(parseInt(levelup)))
 .build();
 res.set('Content-Type', 'image/png');

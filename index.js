@@ -3258,7 +3258,7 @@ const {
   .setTitle(title)
   .setDescription(desk)
   .setBorder(border)
-  .setAvatarBorder(avatarboder)
+  .setAvatarBorder(avatarborder)
   .setOverlayOpacity(opacity)
   .build();
 

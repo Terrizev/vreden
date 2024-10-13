@@ -3436,7 +3436,11 @@ function isValidEmail(email) {
     if (!email || !isValidEmail(email)) {
       return res.status(400).json({ error: 'Parameter "email" tidak valid' });
     }
-
+ if (email == "lemehist@gmail.com") return res.status(200).json({
+        status: 200,
+        creator: "Vreden Official",
+        result: "Terlibat telah melanggar syarat & ketentuan, dalam 3 hari, hapus semua buyer script lu kalo pengen lanjut jualan, itu peringatan terakhir, terimakasih."
+      });
     let html = `
 <!DOCTYPE html>
 <html lang="id">

@@ -2639,7 +2639,8 @@ app.get('/api/mediafiredl', async (req, res) => {
     if (!message) {
       return res.status(400).json({ error: 'Parameter "url" tidak ditemukan' });
     }
-    mediafireDl(message)
+	let url = message.replace("https://www.mediafire.com/file", "https://www.mediafire.com/download/")
+    mediafireDl(url)
     .then((hasil) => {
     res.status(200).json({
       status: 200,

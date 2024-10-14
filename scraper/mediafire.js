@@ -3,16 +3,19 @@ const axios = require('axios')
 const cheerio = require('cheerio')
 
 const mediafireDl = async (url) => {
-const res = await axios.get(url) 
-const $ = cheerio.load(res.data)
+const res = await axios.get(`https://api.botwa.space/api/mediafire?url=${encodeURIComponent(url)}&apikey=YcOZYAZiP7vO`)
 const hasil = []
-const link = $('a#downloadButton').attr('href')
-const size = $('a#downloadButton').text().replace('Download', '').replace('(', '').replace(')', '').replace('\n', '').replace('\n', '').replace('                         ', '')
-const seplit = link.split('/')
-const nama = seplit[5]
-mime = nama.split('.')
-mime = mime[1]
-hasil.push({ nama, mime, size, link })
+const link = res.data.result.link
+const size = res.data.result.filesize
+const sizeB = parseFloat(size) * (/MB$/.test(size) ? 1000 : 1)
+const nama = res.data.result.filename
+const mime = res.data.result.mimetype
+hasil.push({ nama: nama,
+mime: mime,
+size: size,
+sizeB: sizeB,
+link: link
+})
 return hasil
 }
 

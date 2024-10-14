@@ -13,7 +13,7 @@ const seplit = link.split('/')
 const nama = seplit[5]
 mime = nama.split('.')
 mime = mime[1]
-hasil.push({ nama, mime, size, link })
+hasil.push({ nama, mime, size, sizeB, link })
 return hasil
 }
 

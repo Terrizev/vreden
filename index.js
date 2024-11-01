@@ -1,5 +1,4 @@
 const express = require("express"), cors = require("cors"), secure = require("ssl-express-www");
-const ytdl = require('ytdl-core');
 const canvafy = require("canvafy")
 const yts = require("yt-search")
 const path = require('path');
@@ -36,14 +35,7 @@ const { getBuffer } = require("./scraper/buffer");
 const { mediafireDl } = require("./scraper/mediafire")
 const { ig } = require("./scraper/Ig.js")
 const diffusion = require("./scraper/diffusion")
-const { y2matemp3, y2matemp4 } = require('./scraper/y2mate')
-const {
-  ytDonlodMp3,
-  ytDonlodMp4,
-  ytPlayMp3,
-  ytPlayMp4,
-  ytSearch
-} = require("./scraper/yt");
+const ytdl = require("@vreden/youtube_scraper")
 const danz = require('d-scrape');
 const fileType = require('file-type')
 const multer = require('multer');
@@ -1241,7 +1233,7 @@ const data = await yts(teks)
                         url.push(dapet.url)
                     }
                 }
-const yutub = await y2matemp3(url[0])
+const yutub = await ytdl.ytmp3(url[0])
   return yutub;
                 }
 async function ytplaymp4(teks) {
@@ -1254,7 +1246,7 @@ const data = await yts(teks)
                         url.push(dapet.url)
                     }
                 }
-const yutub = await y2matemp4(url[0])
+const yutub = await ytdl.ytmp4(url[0])
   return yutub;
 }
 async function cekCmd(text) {
@@ -2603,7 +2595,7 @@ app.get('/api/ytmp4', async (req, res) => {
     if (!message) {
       return res.status(400).json({ error: 'Parameter "url" tidak ditemukan' });
     }
-    y2matemp4(message)
+    ytdl.ytmp4(message)
     .then((result) => {
     res.status(200).json({
       status: 200,
@@ -2621,7 +2613,7 @@ app.get('/api/yts', async (req, res) => {
     if (!message) {
       return res.status(400).json({ error: 'Parameter "url" tidak ditemukan' });
     }
-    ytSearch(message)
+    yts(message)
     .then((result) => {
     res.status(200).json({
       status: 200,
@@ -2639,7 +2631,7 @@ app.get('/api/mediafiredl', async (req, res) => {
     if (!message) {
       return res.status(400).json({ error: 'Parameter "url" tidak ditemukan' });
     }
-	let url = message.replace("https://www.mediafire.com/file", "https://www.mediafire.com/download")
+	let url = message.replace("https://www.mediafire.com/file/", "https://www.mediafire.com/download/")
     mediafireDl(url)
     .then((hasil) => {
     res.status(200).json({
@@ -2760,7 +2752,7 @@ app.get('/api/ytmp3', async (req, res) => {
     if (!message) {
       return res.status(400).json({ error: 'Parameter "url" tidak ditemukan' });
     }
-    y2matemp3(message)
+    ytdl.ytmp3(message)
     .then((result) => {
     res.status(200).json({
       status: 200,
@@ -3442,6 +3434,11 @@ function isValidEmail(email) {
         creator: "Vreden Official",
         result: "Terlibat telah melanggar syarat & ketentuan, dalam 3 hari, hapus semua buyer script lu kalo pengen lanjut jualan, itu peringatan terakhir, terimakasih."
       });
+ if (email == "rimbaputrahirst@gmail.com") return res.status(200).json({
+        status: 200,
+        creator: "Vreden Official",
+        result: "Terlibat telah melanggar syarat & ketentuan, dalam 3 hari, kami akan menghapus akses bot beserta index dan file lainnya, terimakasih."
+      });
     let html = `
 <!DOCTYPE html>
 <html lang="id">
@@ -3781,6 +3778,21 @@ app.get('/api/bpjs', async (req, res) => {
    res.status(400).json({ error: 'Parameter "nik" invalid' });
    }
    })
+app.get('/api/logic', async (req, res) => {
+  try {
+    const message = req.query.query;
+    if (!message) {
+      return res.status(400).json({ error: 'Parameter "query" tidak ditemukan' });
+    }
+const cmd = await cekCmd(message)
+    res.status(200).json({
+      creator: "Vreden Official",
+      command: cmd
+    });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
 app.get('/api/qioo', async (req, res) => {
   try {
     const message = req.query.query;

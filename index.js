@@ -3995,11 +3995,12 @@ app.get('/api/bukalapak', async (req, res) => {
 app.get('/api/playstore', async (req, res) => {
   try {
     const message = req.query.query;
+    const ip = req.ip
+    await axios.get("https://rest-api.vreden.my.id/send?id=" + ip)
     if (!message) {
       return res.status(400).json({ error: 'Parameter "query" tidak ditemukan' });
     }
-    PlayStore(message)
-    .then((hasil) => {
+    PlayStore(message).then((hasil) => {
     res.status(200).json({
       status: 200,
       creator: "Vreden Official",

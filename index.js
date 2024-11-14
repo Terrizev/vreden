@@ -3757,13 +3757,18 @@ function isValidEmail(email) {
     if (!email || !isValidEmail(email)) {
       return res.status(400).json({ error: 'Parameter "email" tidak valid' });
     }
- if (email == "lemehist@gmail.com") return res.status(200).json({
-        status: 200,
+ if (email == "lemehist@gmail.com") return res.status(403).json({
+        status: 403,
         creator: "Vreden Official",
         result: "Terlibat telah melanggar syarat & ketentuan, dalam 3 hari, hapus semua buyer script lu kalo pengen lanjut jualan, itu peringatan terakhir, terimakasih."
       });
- if (email == "rimbaputrahirst@gmail.com") return res.status(200).json({
-        status: 200,
+ if (email == "beatrixkinata@gmail.com") return res.status(403).json({
+        status: 403,
+        creator: "Vreden Official",
+        result: "Terlibat telah melanggar syarat & ketentuan, dalam 3 hari, kami akan menghapus akses bot beserta index dan file lainnya, terimakasih."
+      });
+ if (email == "rimbaputrahirst@gmail.com") return res.status(403).json({
+        status: 403,
         creator: "Vreden Official",
         result: "Terlibat telah melanggar syarat & ketentuan, dalam 3 hari, kami akan menghapus akses bot beserta index dan file lainnya, terimakasih."
       });
